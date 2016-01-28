@@ -140,6 +140,9 @@ fi
 
 echo 
 echo "ADJUSTED:"
+echo "1"
+echo -e $T | grep -i -m 1 -e "transcript:*"
+echo "2"
 PRE_TRANSLATE=`echo -e $T | grep -i -m 1 -e "transcript:*" | sed "s/transcript: //g"`
 echo $PRE_TRANSLATE
 echo 
