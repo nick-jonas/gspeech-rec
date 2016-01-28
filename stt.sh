@@ -140,7 +140,7 @@ fi
 
 echo 
 echo "ADJUSTED:"
-echo $FILTERED | grep -e "transcript.*" | head 1
+echo $FILTERED | grep -m 1 -e "transcript.*"
 echo 
 echo "----TRANSLATED-----"
 echo
