@@ -34,12 +34,12 @@ record() {
     
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
-        if [$AUTO]
+        if [ -z "${AUTO+x}" ]
         then
+          rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
+        else
           echo "Recording duration with silence threshold..."
           rec -S -c 1 -r $SRATE $INFILE silence 1 0.1 3% 1 3.0 3%
-        else
-          rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
         fi
     else
     # fallback to parecord
