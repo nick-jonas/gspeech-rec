@@ -8,6 +8,7 @@ cat << EOF
   Record an utterance and send audio data to Google for speech recognition.
   
        -h|--help               display this help and exit
+       -a|--auto               start stop recording automatically based on silence 
        -i|--input     INFILE   use INFILE instead of recording a stream with parecord.
        -d|--duration  FLOAT    recoding duration in seconds (Default: 3).
        -l|--language  STRING   set transcription language (Default: en_US).
@@ -29,11 +30,16 @@ record() {
     DURATION=$1
     SRATE=$2
     INFILE=$3
+    AUTO=$4
     
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
-        # rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
-        rec -S -c 1 -r $SRATE $INFILE silence 1 0.1 3% 1 3.0 3%
+        if $AUTO then
+          echo "Recording duration with silence threshold..."
+          rec -S -c 1 -r $SRATE $INFILE silence 1 0.1 3% 1 3.0 3%
+        else
+          rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
+        fi
     else
     # fallback to parecord
         timeout $DURATION parecord $INFILE --file-format=flac --rate=$SRATE --channels=1
@@ -69,6 +75,10 @@ do
        KEY="$2"
        shift
        ;;
+       -a|--auto)
+       AUTO="$2"
+       shift
+       ;;
        *)
        echo "Unknown parameter '$key'. Type $0 -h for more information."
        exit 1
@@ -88,6 +98,7 @@ if [[ ! "$LANGUAGE" ]]
      echo "ERROR: empty value for language."
      exit 1
 fi
+
  
 if [[ ! "$INFILE" ]]
    then
@@ -98,7 +109,7 @@ if [[ ! "$INFILE" ]]
       fi
       echo "Say something..."
       echo ""
-      record $DURATION $SRATE $INFILE
+      record $DURATION $SRATE $INFILE $AUTO
  
 else
       if  [[ ! "$SRATE" ]]
