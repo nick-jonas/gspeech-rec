@@ -33,7 +33,6 @@ record() {
     
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
-        echo "Recording with SOX..."
         rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION 
     else
     # fallback to parecord
@@ -107,6 +106,7 @@ if [[ ! "$INFILE" ]]
 
       if [ -z "${AUTO+x}" ]
       then
+        echo "Recording with SOX..."
         record $DURATION $SRATE $INFILE $AUTO
       else
         echo "Recording duration with silence threshold..."
@@ -126,8 +126,10 @@ fi
  
 RESULT=`wget -q --post-file $INFILE --header="Content-Type: audio/x-flac; rate=$SRATE" -O - "http://www.google.com/speech-api/v2/recognize?client=chromium&lang=$LANGUAGE&key=$KEY"`
  
-FILTERED=`echo "$RESULT" | grep "transcript.*}" | sed 's/,/\n/g;s/[{,},"]//g;s/\[//g;s/\]//g;s/:/: /g' | grep -o -i -e "transcript.*" -e "confidence:.*"`
- 
+
+# FILTERED=`echo "$RESULT" | grep "transcript.*}" | sed 's/,/\n/g;s/[{,},"]//g;s/\[//g;s/\]//g;s/:/: /g' | grep -o -i -e "transcript.*" -e "confidence:.*"`
+FILTERED=`echo "$RESULT"`
+
 if [[ ! "$FILTERED" ]]
   then
      >&2 echo "Google was unable to recognize any speech in audio data"
