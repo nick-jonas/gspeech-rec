@@ -140,10 +140,11 @@ fi
 
 echo 
 echo "ADJUSTED:"
-echo $FILTERED | grep -m 1 -e "transcript.*"
+PRE_TRANSLATE = 'echo -e $FILTERED | grep -i -m 1 -e "transcript:*" | sed "s/transcript: //g"'
+echo $PRE_TRANSLATE
 echo 
 echo "----TRANSLATED-----"
 echo
-echo $FILTERED | sudo trans -b :fr
+echo $PRE_TRANSLATE | sudo trans -b :fr
  
 exit 0
