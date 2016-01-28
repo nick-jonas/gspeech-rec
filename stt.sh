@@ -30,17 +30,10 @@ record() {
     DURATION=$1
     SRATE=$2
     INFILE=$3
-    AUTO=$4
     
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
-        if [ -z "${AUTO+x}" ]
-        then
-          rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
-        else
-          echo "Recording duration with silence threshold..."
-          rec -S -c 1 -r $SRATE $INFILE silence 1 0.1 3% 1 3.0 3%
-        fi
+        rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
     else
     # fallback to parecord
         timeout $DURATION parecord $INFILE --file-format=flac --rate=$SRATE --channels=1
@@ -110,7 +103,14 @@ if [[ ! "$INFILE" ]]
       fi
       echo "Say something..."
       echo ""
-      record $DURATION $SRATE $INFILE $AUTO
+
+      if [ -z "${AUTO+x}" ]
+      then
+        record $DURATION $SRATE $INFILE $AUTO
+      else
+        echo "Recording duration with silence threshold..."
+        rec -S -c 1 -r $SRATE $INFILE silence 1 0.1 3% 1 3.0 3%
+      fi
  
 else
       if  [[ ! "$SRATE" ]]
