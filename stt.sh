@@ -143,7 +143,7 @@ echo "ADJUSTED:"
 echo "1"
 echo -e $FILTERED | grep -i -m 1 -e "transcript:*"
 echo "2"
-PRE_TRANSLATE=`echo -e $FILTERED | grep -i -m 1 -e "transcript:*" | sed "s/transcript: //g"`
+PRE_TRANSLATE=`echo -e $FILTERED | grep -i -m 1 -e "transcript:*" | sed "s/transcript: //g" | sed "s/confidence:.*$//g"`
 echo $PRE_TRANSLATE
 echo 
 echo "----TRANSLATED-----"
