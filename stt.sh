@@ -34,7 +34,7 @@ record() {
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
         echo "Recording with SOX..."
-        rec -t alsa -S -c 1 -r $SRATE $INFILE trim 0 $DURATION 
+        rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION 
     else
     # fallback to parecord
         timeout $DURATION parecord $INFILE --file-format=flac --rate=$SRATE --channels=1
@@ -110,7 +110,7 @@ if [[ ! "$INFILE" ]]
         record $DURATION $SRATE $INFILE $AUTO
       else
         echo "Recording duration with silence threshold..."
-        rec -S -c 1 -r $SRATE $INFILE silence 1 0.1 3% 1 3.0 3%
+        rec -S -c 1 -r $SRATE $INFILE silence 1 0 8% -1 00:00:05 8%
       fi
  
 else
