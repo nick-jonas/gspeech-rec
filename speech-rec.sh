@@ -12,7 +12,7 @@ cat << EOF
        -d|--duration  FLOAT    recoding duration in seconds (Default: 3).
        -l|--language  STRING   set transcription language (Default: en_US).
                                Other languages: fr-FR, de-DE, es-ES, ...
-       -r|--rate      INTEGER  Sampling rate of recorded data (Default: 16000).
+       -r|--rate      INTEGER  Sampling rate of recorded data (Default: 48000).
                                If -i|--input is used, the sampling rate must be supplied by the user.
        -k|--key       STRING   Google Speech Recognition Key.
                   
@@ -22,7 +22,7 @@ EOF
 DURATION=3
 LANGUAGE=en-US
 # Please replace this wih your own key
-KEY=AIzaSyAcalCzUvPmmJ7CZBFOEWx2Z1ZSn4Vs1gg
+KEY=AIzaSyAbx9tR74Gh-pDTy_gsbsdt-s_pX5jK0ik
 
 
 record() {
@@ -32,7 +32,7 @@ record() {
     
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
-        rec -q -c 1 -r $SRATE $INFILE trim 0 $DURATION
+        rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
     else
     # fallback to parecord
         timeout $DURATION parecord $INFILE --file-format=flac --rate=$SRATE --channels=1
@@ -93,7 +93,7 @@ if [[ ! "$INFILE" ]]
       INFILE=record.flac
       if  [[ ! "$SRATE" ]]
          then
-            SRATE=16000
+            SRATE=48000
       fi
       echo "Say something..."
       echo ""
