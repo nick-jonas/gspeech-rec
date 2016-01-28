@@ -138,6 +138,10 @@ else
     echo "$FILTERED"
 fi
 
+echo 
+echo "ADJUSTED:"
+echo $FILTERED | grep -e "transcript.*" | head 1
+echo 
 echo "----TRANSLATED-----"
 echo
 echo $FILTERED | sudo trans -b :fr
