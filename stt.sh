@@ -137,5 +137,9 @@ else
     echo ""
     echo "$FILTERED"
 fi
+
+echo "----TRANSLATED-----"
+echo
+echo $FILTERED | sudo trans -b :fr
  
 exit 0
