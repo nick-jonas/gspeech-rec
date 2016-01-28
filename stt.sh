@@ -33,7 +33,8 @@ record() {
     
     if hash rec 2>/dev/null; then
     # try to record audio with sox 
-        rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION
+        echo "Recording with SOX..."
+        rec -S -c 1 -r $SRATE $INFILE trim 0 $DURATION -t alsa
     else
     # fallback to parecord
         timeout $DURATION parecord $INFILE --file-format=flac --rate=$SRATE --channels=1
