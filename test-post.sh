@@ -1,0 +1,2 @@
+wget -q --post-file ./record.flac --header="Content-Type: audio/x-flac; rate=$SRATE" -O - "https://www.google.com/speech-api/v2/recognize?client=chromium&lang=en-US&key=AIzaSyAbx9tR74Gh-pDTy_gsbsdt-s_pX5jK0ik
+&endpointer=1"

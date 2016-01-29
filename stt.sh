@@ -139,15 +139,23 @@ else
 fi
 
 echo 
-echo "ADJUSTED:"
-echo "1"
-echo -e $FILTERED | grep -i -m 1 -e "transcript:*"
-echo "2"
+echo "CAPTURED TEXT:"
 PRE_TRANSLATE=`echo -e $FILTERED | grep -i -m 1 -e "transcript:*" | sed "s/transcript: //g" | sed "s/confidence:.*$//g"`
 echo $PRE_TRANSLATE
 echo 
 echo "----TRANSLATED-----"
 echo
-echo $PRE_TRANSLATE | sudo trans -b :fr
+
+FRENCH=`echo $PRE_TRANSLATE | sudo trans -b :fr`
+SPANISH=`echo $PRE_TRANSLATE | sudo trans -b :es`
+JAPANESE=`echo $PRE_TRANSLATE | sudo trans -b :ja`
+SWEDISH=`echo $PRE_TRANSLATE | sudo trans -b :sv`
+PERSIAN=`echo $PRE_TRANSLATE | sudo trans -b :fa`
+
+echo "French: $FRENCH"
+echo "Spanish: $SPANISH"
+echo "Japanese: $JAPANESE"
+echo "Swedish: $SWEDISH"
+echo "Persian: $PERSIAN"
  
 exit 0
