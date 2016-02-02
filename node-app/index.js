@@ -180,7 +180,7 @@ exports.parseResult = function (err, resp, body) {
 };
 
 
-// startRecording();
+startRecording();
 
 try{
   var lcd = new Screen({
