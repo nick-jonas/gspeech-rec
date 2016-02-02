@@ -190,3 +190,4 @@ try{
 }catch(e){
   console.log('Screen does not work on this device.');
 }
+

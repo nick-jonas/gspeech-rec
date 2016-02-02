@@ -31,8 +31,10 @@ Screen.prototype.showLanguageOptions = function() {
 
   this.lcd.once('printed', function(){
     // show output language
-    that.lcd.setCursor(0,1);
-    that.lcd.print(lang.getNameFromIndex(this.currOutputIndex) + ' ->');
+    var outputLanguage = lang.getNameFromIndex(that.currOutputIndex) + ' ->';
+    // right align text
+    that.lcd.setCursor(16 - outputLanguage.length, 1);
+    that.lcd.print(outputLanguage);
     that.lcd.once('printed', function(){
       that.lcd.clear();
       that.lcd.close();
