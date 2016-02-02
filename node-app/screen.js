@@ -17,7 +17,8 @@ var Screen = function(options){
 }
 
 Screen.prototype.showLanguageOptions = function() {
-  var langNames = Object.keys(lang.options);
+  var that = this,
+    langNames = Object.keys(lang.options);
   // show input language
   this.lcd.setCursor(0,0);
   console.log('printing: ')
@@ -26,13 +27,13 @@ Screen.prototype.showLanguageOptions = function() {
 
   this.lcd.once('printed', function(){
     // show output language
-    this.lcd.setCursor(0,1);
+    that.lcd.setCursor(0,1);
     console.log('printing: ')
-    console.log(langNames[this.currOutputIndex] + '->');
-    this.lcd.print(langNames[this.currOutputIndex] + '->');
-    this.lcd.once('printed', function(){
-      this.lcd.clear();
-      this.lcd.close();
+    console.log(langNames[that.currOutputIndex] + '->');
+    that.lcd.print(langNames[that.currOutputIndex] + '->');
+    that.lcd.once('printed', function(){
+      that.lcd.clear();
+      that.lcd.close();
     });
   });
 
