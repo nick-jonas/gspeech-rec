@@ -16,6 +16,7 @@
     "google-speech": "~0.0.5",
     "hasbin": "^1.2.0",
     "node-record-lpcm16": "^0.1.4",
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "request": "^2.69.0"
   }
 }
