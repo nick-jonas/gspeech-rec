@@ -18,6 +18,23 @@ var getNameFromCode = function(langCode){
   }
 };
 
+var getNameFromIndex = function(index){
+  for(var k in options[index]){
+    return k;
+  }
+};
+
+var getIndexFromCode = function(langCode){
+  for(var i = 0; i < options.length; i++){
+    for(var k in options[i]){
+      if(langCode === options[i][k]){
+        return i;
+      }
+    }
+  }
+};
+
+
 var options =  [{Afrikaans: 'af'},
 {Albanian : 'sq'},
 {Arabic : 'ar'},
@@ -112,4 +129,6 @@ var options =  [{Afrikaans: 'af'},
 
 module.exports.getCodeFromName = getCodeFromName;
 module.exports.getNameFromCode = getNameFromCode;
+module.exports.getNameFromIndex = getNameFromIndex;
+module.exports.getIndexFromCode = getIndexFromCode;
 module.exports.options = options;
