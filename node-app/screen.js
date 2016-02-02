@@ -13,7 +13,7 @@ var Screen = function(options){
     cols: 16,
     rows: 2
   }); // Pi
-  this.lcd.on('ready', this.showLanguageOptions);
+  this.lcd.on('ready', this.showLanguageOptions.bind(this));
 }
 
 Screen.prototype.showLanguageOptions = function() {
