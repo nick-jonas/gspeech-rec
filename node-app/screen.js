@@ -2,7 +2,7 @@ var Lcd = require('lcd'),
   fs = require('fs'),
   lang = require('./lang');
 
-function Screen(options){
+var Screen = function(options){
   this.currInputIndex = 0;
   this.currOutputIndex = 0;
 

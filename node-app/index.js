@@ -7,7 +7,7 @@ var rec       = require('node-record-lpcm16'),
     hasbin    = require('hasbin'),
     exec      = require('child_process').exec,
     lang      = require('./lang'),
-    lcd       = require('./screen');
+    Screen       = require('./screen');
     
 var WIT_TOKEN = 'JIO3NKSOIXLMGI5TZJ3FJVZDJ2GNRTL2';
 var GOOGLE_KEY = 'AIzaSyAUpnxV2S7nNAlIo9sZnJBVligAJBzMWc0';
@@ -183,4 +183,4 @@ exports.parseResult = function (err, resp, body) {
 // startRecording();
 
 
-lcd = new lcd();
+var screen = new Screen();
