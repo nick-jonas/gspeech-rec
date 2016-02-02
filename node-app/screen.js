@@ -21,11 +21,15 @@ Screen.prototype.showLanguageOptions = function() {
 
   // show input language
   lcd.setCursor(0,0);
+  console.log('printing: ')
+  console.log('->' + langNames[this.currInputIndex]);
   lcd.print('->' + langNames[this.currInputIndex]);
 
   lcd.once('printed', function(){
     // show output language
     lcd.setCursor(0,1);
+    console.log('printing: ')
+    console.log(langNames[this.currOutputIndex] + '->');
     lcd.print(langNames[this.currOutputIndex] + '->');
     lcd.once('printed', function(){
       lcd.clear();
