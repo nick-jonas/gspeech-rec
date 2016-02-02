@@ -4,11 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "save-file": "sudo node index.js",
+    "translate-google": "sudo node index.js -o google",
+    "translate-wit": "sudo node index.js -o wit",
+    "translate": "npm run translate-google"
   },
   "author": "nick-jonas",
   "license": "ISC",
-  "dependencies":{
-    "google-speech": "~0.0.5"
+  "dependencies": {
+    "commander": "^2.9.0",
+    "google-speech": "~0.0.5",
+    "hasbin": "^1.2.0",
+    "node-record-lpcm16": "^0.1.4",
+    "querystring": "^0.2.0"
   }
 }
