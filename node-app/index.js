@@ -183,4 +183,4 @@ exports.parseResult = function (err, resp, body) {
 // startRecording();
 
 
-var screen = new Screen();
+var lcd = new Screen();

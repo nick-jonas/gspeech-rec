@@ -6,6 +6,8 @@ var Screen = function(options){
   this.currInputIndex = 0;
   this.currOutputIndex = 0;
 
+  console.log('here');
+
   this.lcd = new Lcd({
     rs: 12,
     e: 21,
@@ -18,7 +20,7 @@ var Screen = function(options){
 
 Screen.prototype.showLanguageOptions = function() {
   var langNames = Object.keys(lang.options);
-
+  console.log('here2');
   // show input language
   lcd.setCursor(0,0);
   console.log('printing: ')
