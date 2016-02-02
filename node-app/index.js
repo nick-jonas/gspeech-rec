@@ -182,12 +182,12 @@ exports.parseResult = function (err, resp, body) {
 
 startRecording();
 
-try{
-  var lcd = new Screen({
-    'language-in': 'en',
-    'language-out': 'es'
-  });
-}catch(e){
-  console.log('Screen does not work on this device.');
-}
+// try{
+//   var lcd = new Screen({
+//     'language-in': 'en',
+//     'language-out': 'es'
+//   });
+// }catch(e){
+//   console.log('Screen does not work on this device.');
+// }
 
