@@ -21,8 +21,8 @@ var outLanguage = lang.getCodeFromName('Spanish');
 // program parameter definition
 program
   .version('0.0.1')
-  .option('-o --output', 'Output type: ' + OUTPUT_TYPES)
-  .option('-r --samplerate', 'Sample rate for recording: 16000, 44100, 48000')
+  .option('-o --output [value]', 'Output type: ' + OUTPUT_TYPES)
+  .option('-r --sample-rate <n>', 'Sample rate for recording: 16000, 44100, 48000')
   .parse(process.argv);
 
 if(program.output){
@@ -32,10 +32,9 @@ if(program.output){
     outputType = program.output;
   }
 }
-if(program.samplerate){
-  SAMPLE_RATE = program.sample_rate;
+if(program.sampleRate){
+  SAMPLE_RATE = program.sampleRate;
 }
-
 
 // piped output options
 var fileRequest = function(){ return fs.createWriteStream('data/sample.wav', { encoding: 'binary' }); };
