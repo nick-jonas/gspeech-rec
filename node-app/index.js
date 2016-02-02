@@ -10,7 +10,7 @@ var rec       = require('node-record-lpcm16'),
     
 var WIT_TOKEN = 'JIO3NKSOIXLMGI5TZJ3FJVZDJ2GNRTL2';
 var GOOGLE_KEY = 'AIzaSyAUpnxV2S7nNAlIo9sZnJBVligAJBzMWc0';
-var SAMPLE_RATE = 48000; // 44100
+var SAMPLE_RATE = 44100;
 
 var OUTPUT_TYPES = ['google', 'wit', 'file'];
 var outputType = 'file';
@@ -21,7 +21,8 @@ var outLanguage = lang.getCodeFromName('Spanish');
 // program parameter definition
 program
   .version('0.0.1')
-  .option('-o --output [output]', 'Output type: ' + OUTPUT_TYPES)
+  .option('-o --output', 'Output type: ' + OUTPUT_TYPES)
+  .option('-r --samplerate', 'Sample rate for recording: 16000, 44100, 48000')
   .parse(process.argv);
 
 if(program.output){
@@ -30,6 +31,9 @@ if(program.output){
   }else{
     outputType = program.output;
   }
+}
+if(program.samplerate){
+  SAMPLE_RATE = program.sample_rate;
 }
 
 
