@@ -6,7 +6,8 @@ var rec       = require('node-record-lpcm16'),
     google_speech = require('google-speech'),
     hasbin    = require('hasbin'),
     exec      = require('child_process').exec,
-    lang      = require ('./lang');
+    lang      = require('./lang'),
+    lcd       = require('./screen');
     
 var WIT_TOKEN = 'JIO3NKSOIXLMGI5TZJ3FJVZDJ2GNRTL2';
 var GOOGLE_KEY = 'AIzaSyAUpnxV2S7nNAlIo9sZnJBVligAJBzMWc0';
@@ -63,7 +64,7 @@ var googleRequest = function(){
 
 
 
-// on press, start recording
+// on press (or looped), start recording
 var startRecording = function(){
   var pipedOutput = fileRequest;
   if(outputType === 'google'){ pipedOutput = googleRequest; }
@@ -97,8 +98,8 @@ var onTranslateComplete = function (err, resp, body){
   if(translations.length > 0){
     // let's take the first translation
     result = translations[0].translatedText;
-    // speech to text
-    speechToText(result);
+    // tts
+    textToSpeech(result);
     if(translations.length > 1){
       console.log('Returned with multiple translations:');
       console.log(body);
@@ -112,7 +113,7 @@ var onTranslateComplete = function (err, resp, body){
 
 }
 
-var speechToText = function(body){
+var textToSpeech = function(body){
   google_speech.TTS({
     text: body,
     file: 'data/out.mp3',
@@ -125,9 +126,11 @@ var speechToText = function(body){
           var cmd = 'omxplayer data/out.mp3';
           exec(cmd, function(error, stdout, stderr){
             console.log(stdout);
+            setTimeout(startRecording, 2000);
           });
         }else{
           console.log('omxplayer is not installed, will not playback audio.');
+          setTimeout(startRecording, 2000);
         }
       });      
 
@@ -174,9 +177,10 @@ exports.parseResult = function (err, resp, body) {
   // translate
   var translatedText = translate(result);
 
-
 };
 
-// start recording
-startRecording();
 
+// startRecording();
+
+
+lcd = new Screen();
