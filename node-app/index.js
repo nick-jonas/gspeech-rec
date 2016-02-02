@@ -10,6 +10,7 @@ var rec       = require('node-record-lpcm16'),
     
 var WIT_TOKEN = 'JIO3NKSOIXLMGI5TZJ3FJVZDJ2GNRTL2';
 var GOOGLE_KEY = 'AIzaSyAUpnxV2S7nNAlIo9sZnJBVligAJBzMWc0';
+var SAMPLE_RATE = 48000; // 44100
 
 var OUTPUT_TYPES = ['google', 'wit', 'file'];
 var outputType = 'file';
@@ -66,7 +67,7 @@ var startRecording = function(){
   if(outputType === 'wit'){ pipedOutput = witRequest; }
 
   rec.start({
-    sampleRate : 44100,
+    sampleRate : SAMPLE_RATE,
     verbose : true,
     threshold: 3
   })
@@ -135,6 +136,10 @@ var speechToText = function(body){
 exports.parseResult = function (err, resp, body) {
   var result;
   console.log(body);
+  if(typeof body === 'undefined' || !body || body === ''){
+    console.log('Could not capture any audio data. Please set up microphone correctly.');
+    return;
+  }
   // parse output
   if(outputType === 'google'){
     // Example Google Response
