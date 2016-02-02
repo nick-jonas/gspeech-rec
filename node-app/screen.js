@@ -6,8 +6,6 @@ var Screen = function(options){
   this.currInputIndex = 0;
   this.currOutputIndex = 0;
 
-  console.log('here');
-
   this.lcd = new Lcd({
     rs: 12,
     e: 21,
@@ -20,22 +18,21 @@ var Screen = function(options){
 
 Screen.prototype.showLanguageOptions = function() {
   var langNames = Object.keys(lang.options);
-  console.log('here2');
   // show input language
-  lcd.setCursor(0,0);
+  this.lcd.setCursor(0,0);
   console.log('printing: ')
   console.log('->' + langNames[this.currInputIndex]);
-  lcd.print('->' + langNames[this.currInputIndex]);
+  this.lcd.print('->' + langNames[this.currInputIndex]);
 
-  lcd.once('printed', function(){
+  this.lcd.once('printed', function(){
     // show output language
-    lcd.setCursor(0,1);
+    this.lcd.setCursor(0,1);
     console.log('printing: ')
     console.log(langNames[this.currOutputIndex] + '->');
-    lcd.print(langNames[this.currOutputIndex] + '->');
-    lcd.once('printed', function(){
-      lcd.clear();
-      lcd.close();
+    this.lcd.print(langNames[this.currOutputIndex] + '->');
+    this.lcd.once('printed', function(){
+      this.lcd.clear();
+      this.lcd.close();
     });
   });
 
