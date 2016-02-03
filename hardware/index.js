@@ -9,7 +9,7 @@ var board = new five.Board({
 board.on('ready', function(){
   lcd = new five.LCD({
     // LCD pin name  RS  EN  DB4 DB5 DB6 DB7
-    pins: [12, 21, 5, 6, 17, 18],
+    pins: ['GPIO12', 'GPIO21', 'GPIO5', 'GPIO6', 'GPIO17', 'GPIO18'],
     backlight: 6,
     rows: 2,
     cols: 16
