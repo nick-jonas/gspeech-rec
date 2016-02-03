@@ -32,7 +32,7 @@ var stt = new Stt({
 stt.start(inLanguage);
 
 function onSpeechToTextResponse(result){
-  translator.translate('hi how are you?', outLanguage)
+  translator.translate(result, outLanguage)
   .then(function(resp){
     console.log(resp);
   });
