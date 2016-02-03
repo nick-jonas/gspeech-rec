@@ -1,11 +1,8 @@
-var fs        = require('fs'),
-    request   = require('request'),
-    qs        = require('querystring'),
-    program   = require('commander'),
-    exec      = require('child_process').exec,
-    lang      = require('./lang'),
-    Stt       = require('./stt'),
-    Tts       = require('./tts'),
+var program     = require('commander'),
+    lang        = require('./lang'),
+    Stt         = require('./stt'),
+    Tts         = require('./tts'),
+    translator  = require('./translate'),
     Screen       = require('./screen');
     
 // var WIT_TOKEN = 'JIO3NKSOIXLMGI5TZJ3FJVZDJ2GNRTL2';
@@ -24,40 +21,6 @@ program
   .parse(process.argv);
 
 
-var translate = function(body){
-  var params = {};
-  params['key'] = GOOGLE_KEY;
-  params['target'] = outLanguage;
-  params['q'] = body;
-  return request.get({
-    'url': 'https://www.googleapis.com/language/translate/v2?' + qs.stringify(params)
-  }, onTranslateComplete);
-}
-
-
-var onTranslateComplete = function (err, resp, body){
-  if(err){
-    console.log(err);
-  }
-  body = JSON.parse(body);
-  var translations = body.data.translations, result;
-  if(translations.length > 0){
-    // let's take the first translation
-    result = translations[0].translatedText;
-    // tts
-    textToSpeech(result);
-    if(translations.length > 1){
-      console.log('Returned with multiple translations:');
-      console.log(body);
-    }else{
-      console.log('Translated: ' + result);
-    }
-  }else{
-    console.log('Did not return with any translations:');
-    console.log(body);
-  }
-
-}
 
 
 var stt = new Stt({
@@ -69,8 +32,13 @@ var stt = new Stt({
 stt.start(inLanguage);
 
 function onSpeechToTextResponse(result){
-  console.log(result);
+  translator.translate('hi how are you?', outLanguage)
+  .then(function(resp){
+    console.log(resp);
+  });
 }
+
+
 
 
 // try{
