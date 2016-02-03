@@ -1,12 +1,13 @@
-var rec       = require('node-record-lpcm16'),
-    fs        = require('fs'),
+var fs        = require('fs'),
     request   = require('request'),
     qs        = require('querystring'),
     program   = require('commander'),
     google_speech = require('google-speech'),
     hasbin    = require('hasbin'),
     exec      = require('child_process').exec,
+    rec       = require('./record'),
     lang      = require('./lang'),
+    stt       = require('./stt'),
     Screen       = require('./screen');
     
 var WIT_TOKEN = 'JIO3NKSOIXLMGI5TZJ3FJVZDJ2GNRTL2';
