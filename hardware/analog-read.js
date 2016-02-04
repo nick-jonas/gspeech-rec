@@ -4,10 +4,10 @@
 var rpio = require('rpio');
 
 rpio.spiBegin();
-//rpio.spiChipSelect(0);                  /* Use CE0 (slave 0) */
-//rpio.spiSetCSPolarity(0, rpio.LOW);    /* Commonly chip enable (CE) pins are active low, and this is the default. */
-//rpio.spiSetClockDivider(256);           /* MCP3008 max is ~1MHz, 256 == 0.98MHz */
-//rpio.spiSetDataMode(0);
+rpio.spiChipSelect(0);                  /* Use CE0 (slave 0) */
+rpio.spiSetCSPolarity(0, rpio.LOW);    /* Commonly chip enable (CE) pins are active low, and this is the default. */
+rpio.spiSetClockDivider(256);           /* MCP3008 max is ~1MHz, 256 == 0.98MHz */
+rpio.spiSetDataMode(0);
 
 process.stdout.write('\x1b[36m');
 for (var channelHeader = 0; channelHeader <= 7; channelHeader++) {
