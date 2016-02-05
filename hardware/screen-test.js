@@ -24,7 +24,7 @@ board.on('ready', function(){
   // lcd.cursor(0, 0).print("-> English");
   // lcd.cursor(1, 5).print("Spanish ->");
 
-  startThinking();
+  showTranslation("Hello how are you today, I'm doing just fine.");
 
   this.repl.inject({
     lcd: lcd
