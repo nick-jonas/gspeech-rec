@@ -40,8 +40,9 @@ board.on('ready', function(){
   //   lcd.clear().cursor(0, 0).print("I :check::heart: 2 :duck: :)");
   // });
 
-  lcd.cursor(0,0).print("-> English");
-  lcd.cursor(0, 1).print("Spanish ->");
+  lcd.clear();
+  lcd.cursor(0, 0).print("-> English");
+  lcd.cursor(1, 5).print("Spanish ->");
 
   this.repl.inject({
     lcd: lcd
