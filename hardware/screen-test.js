@@ -51,7 +51,7 @@ function startThinking(){
     lcd.cursor(0, startPosition + currIndex);
     lcd.print('.');
     currIndex++;
-  }, 1000);
+  }, 300);
 }
 
 function stopThinking(){
