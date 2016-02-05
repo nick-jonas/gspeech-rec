@@ -20,11 +20,9 @@ board.on('ready', function(){
     // dots: matrix dimensions, defaults to "5x8"
   });
 
-  // lcd.clear();
-  // lcd.cursor(0, 0).print("-> English");
-  // lcd.cursor(1, 5).print("Spanish ->");
-
-  showTranslation("Hello how are you today, I'm doing just fine.");
+  lcd.clear();
+  lcd.cursor(0, 0).print("-> English");
+  lcd.cursor(1, 5).print("Spanish ->");
 
   this.repl.inject({
     lcd: lcd
