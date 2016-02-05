@@ -47,6 +47,31 @@ board.on('ready', function(){
   this.repl.inject({
     lcd: lcd
   });
-
 });
 
+var showTranslation(text){
+  lcd.clear();
+  lcd.autoscroll();
+  lcd.cursor(0, 0).print(text);
+}
+
+// blinks 3 dots
+var thinkInterval;
+function startThinking(){
+  var dotCount = 3;
+  var currIndex = 0;
+  var startPosition = 7;
+  thinkInterval = setInterval(function(){
+    lcd.clear();
+    if(currIndex === dotCount){
+      currIndex = 0;
+    }
+    lcd.cursor(0, startPosition + currIndex);
+    lcd.print('.');
+    currIndex++;
+  }, 1000);
+}
+
+function stopThinking(){
+  clearInterval(thinkInterval);
+}

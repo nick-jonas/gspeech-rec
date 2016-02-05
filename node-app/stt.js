@@ -45,7 +45,7 @@ Stt.prototype.start = function(inLang) {
   var recording = rec.start({
     sampleRate : sampleRate,
     verbose : true,
-    threshold: 3
+    threshold: 3 // let's try using 8% too, as per: http://mocha.freeshell.org/audio.html
   })
   .pipe(pipedOutput(inLang));
 };
