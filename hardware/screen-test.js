@@ -31,7 +31,7 @@ board.on('ready', function(){
   });
 });
 
-var showTranslation(text){
+var showTranslation = function(text){
   lcd.clear();
   lcd.autoscroll();
   lcd.cursor(0, 0).print(text);
